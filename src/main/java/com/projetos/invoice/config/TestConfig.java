@@ -10,9 +10,11 @@ import org.springframework.context.annotation.Profile;
 
 import com.projetos.invoice.entities.Client;
 import com.projetos.invoice.entities.Invoice;
+import com.projetos.invoice.entities.Product;
 import com.projetos.invoice.entities.Supplier;
 import com.projetos.invoice.repositories.ClientRepository;
 import com.projetos.invoice.repositories.InvoiceRepository;
+import com.projetos.invoice.repositories.ProductRepository;
 import com.projetos.invoice.repositories.SupplierRepository;
 
 @Configuration
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private SupplierRepository supplierRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -44,7 +49,12 @@ public class TestConfig implements CommandLineRunner {
 		Supplier sup1 = new Supplier(null, "ABC");
 		Supplier sup2 = new Supplier(null, "DEF");
 		
+		Product pr1 = new Product(null, "Pasta", 20.0, sup1);
+		Product pr2 = new Product(null, "Carne", 22.0, sup2);
+		Product pr3 = new Product(null, "Frango", 12.0, sup2);
+		
 		supplierRepository.saveAll(Arrays.asList(sup1,sup2));
+		productRepository.saveAll(Arrays.asList(pr1,pr2,pr3));
 		
 	}
 
